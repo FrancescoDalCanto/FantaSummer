@@ -29,9 +29,18 @@ export default function User() {
                 const userDoc = await getDoc(doc(db, "groups", groupId, "users", auth.currentUser.uid));
                 const isParticipant = userDoc.exists();
 
-                if (isCreator || isParticipant) {
-                    const userPunti = isParticipant ? userDoc.data().punti : 0;
+                let userPunti = 0;
 
+                if (isParticipant) {
+                    // Prendi i punti aggiornati da USER (users/{userId})
+                    const userGlobalDoc = await getDoc(doc(db, "users", auth.currentUser.uid));
+
+                    if (userGlobalDoc.exists()) {
+                        userPunti = userGlobalDoc.data().punti;
+                    }
+                }
+
+                if (isCreator || isParticipant) {
                     groupsData.push({
                         id: groupId,
                         name: group.name,

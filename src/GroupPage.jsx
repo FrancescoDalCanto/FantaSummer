@@ -25,10 +25,21 @@ export default function GroupPage() {
             const usersRef = collection(db, "groups", id, "users");
             const usersSnapshot = await getDocs(usersRef);
 
-            const users = usersSnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
+            const users = await Promise.all(
+                usersSnapshot.docs.map(async (docSnap) => {
+                    const userId = docSnap.id;
+
+                    // Leggi i dati aggiornati dal documento globale dell'utente
+                    const userRef = doc(db, "users", userId);
+                    const userDoc = await getDoc(userRef);
+
+                    return {
+                        id: userId,
+                        name: docSnap.data().name, // Nome preso dal gruppo (se vuoi puoi prenderlo anche da userDoc)
+                        punti: userDoc.exists() ? userDoc.data().punti : 0 // Punti aggiornati da USER
+                    };
+                })
+            );
 
             // Ordina i partecipanti per punti decrescenti
             users.sort((a, b) => b.punti - a.punti);
