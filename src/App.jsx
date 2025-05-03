@@ -46,7 +46,7 @@ export default function App() {
 
       {/* Footer con i nomi e link Instagram */}
       <div className="mt-auto text-gray-500 text-sm space-x-2">
-        <span>Creato da</span>
+        <span>Creato da </span>
         <a
           href="https://instagram.com/antonio.ciuffo"
           target="_blank"
@@ -55,7 +55,7 @@ export default function App() {
         >
           @antonio.ciuffo
         </a>
-        <span>e</span>
+        <span> e </span>
         <a
           href="https://instagram.com/francesco.dalcanto"
           target="_blank"
