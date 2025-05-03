@@ -1,13 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Icona del sito (favicon) -->
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+  <!-- Manifest della PWA: permette al browser di sapere come installare e comportarsi con l'app -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Colore della barra superiore su dispositivi mobili e su Chrome -->
+  <meta name="theme-color" content="#2196f3" />
+
+  <!-- Impostazioni per rendere il sito responsive e adattabile a dispositivi mobili -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Titolo della pagina web (visibile nella scheda del browser e nei suggerimenti di installazione della PWA) -->
+  <title>FantaSummer</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
