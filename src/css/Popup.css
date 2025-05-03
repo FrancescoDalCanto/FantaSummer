@@ -1,0 +1,167 @@
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 9999;
+}
+
+.popup-container {
+    background-color: #fff;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid #93c5fd;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.popup-content {
+    padding: 24px;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    color: #2563eb;
+}
+
+.popup-error {
+    background-color: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.popup-field label {
+    color: #2563eb;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.popup-field input {
+    width: 100%;
+    padding: 12px;
+    background-color: #eff6ff;
+    color: #1e3a8a;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+}
+
+.popup-field input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+.popup-button {
+    padding: 12px;
+    background: linear-gradient(to right, #3b82f6, #22c55e);
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.popup-button:hover {
+    background: linear-gradient(to right, #2563eb, #16a34a);
+}
+
+.popup-button.disabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+}
+
+.popup-divider {
+    text-align: center;
+    color: #6b7280;
+    margin: 24px 0;
+    position: relative;
+}
+
+.popup-divider::before,
+.popup-divider::after {
+    content: "";
+    height: 1px;
+    background-color: #d1d5db;
+    flex: 1;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 12px;
+}
+
+.popup-google-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #bfdbfe;
+    color: #1e40af;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.popup-google-button:hover {
+    background-color: #93c5fd;
+}
+
+.popup-google-logo {
+    width: 20px;
+    height: 20px;
+}
+
+.popup-footer {
+    background-color: #eff6ff;
+    padding: 16px;
+    text-align: center;
+}
+
+.popup-footer p {
+    color: #2563eb;
+}
+
+.popup-footer-link {
+    background: none;
+    border: none;
+    color: #22c55e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.popup-footer-link:hover {
+    text-decoration: underline;
+}

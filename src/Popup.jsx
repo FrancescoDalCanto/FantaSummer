@@ -7,8 +7,11 @@ import {
     signInWithGoogle,
     createUserWithEmailAndPassword,
     updateProfile,
+    db
 } from "./firebase.jsx";
+import { doc, setDoc } from "firebase/firestore";
 import { useRedirect } from "./RedirectContext";
+import "./css/Popup.css";
 
 const Popup = ({ type, onClose }) => {
     const [email, setEmail] = useState("");
@@ -57,10 +60,12 @@ const Popup = ({ type, onClose }) => {
         setLoading(true);
         setError("");
 
-        const whitelist = ["test@gmail.com", "test12"];
+        const whitelist = ["test@gmail.com"];
 
         try {
-            if (!whitelist.includes(email)) {
+            const isWhitelisted = whitelist.includes(email) || email.startsWith("test");
+
+            if (!isWhitelisted) {
                 const check = await verifyEmailWithGhostMail(email);
                 if (!check.valid) {
                     setError("Email non valida o temporanea.");
@@ -71,6 +76,12 @@ const Popup = ({ type, onClose }) => {
 
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await updateProfile(userCredential.user, { displayName: name });
+
+            // ✅ CREA IL DOCUMENTO FIRESTORE PER IL NUOVO UTENTE
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                punti: 0,
+                lastQuestDate: ""
+            });
 
             if (redirectSessionId) {
                 navigate(`/session/${redirectSessionId}`);
@@ -88,31 +99,21 @@ const Popup = ({ type, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-md w-full border-2 border-blue-300 shadow-lg">
-                <div className="p-6 space-y-6">
-                    <div className="flex justify-between items-center">
-                        <h2 className="text-2xl font-bold text-blue-500">
+        <div className="popup-overlay">
+            <div className="popup-container">
+                <div className="popup-content">
+                    <div className="popup-header">
+                        <h2 className="popup-title">
                             {formType === "Login" ? "Accedi" : "Registrati"}
                         </h2>
-                        <button
-                            onClick={onClose}
-                            className="text-blue-400 hover:text-blue-600 transition"
-                            aria-label="Chiudi"
-                        >
-                            ✕
-                        </button>
+                        <button onClick={onClose} className="popup-close">✕</button>
                     </div>
 
-                    {error && (
-                        <div className="bg-red-100 border border-red-400 text-red-600 px-4 py-3 rounded-lg">
-                            {error}
-                        </div>
-                    )}
+                    {error && <div className="popup-error">{error}</div>}
 
                     {formType === "Login" ? (
                         <form
-                            className="space-y-4"
+                            className="popup-form"
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 handleAuthAction(() =>
@@ -120,25 +121,23 @@ const Popup = ({ type, onClose }) => {
                                 );
                             }}
                         >
-                            <div>
-                                <label className="block text-blue-600 mb-2">Email</label>
+                            <div className="popup-field">
+                                <label>Email</label>
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-blue-50 text-blue-900 p-3 rounded-lg focus:ring-2 focus:ring-blue-400"
                                     placeholder="tua@email.com"
                                     disabled={loading}
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-blue-600 mb-2">Password</label>
+                            <div className="popup-field">
+                                <label>Password</label>
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-blue-50 text-blue-900 p-3 rounded-lg focus:ring-2 focus:ring-blue-400"
                                     placeholder="La tua password"
                                     disabled={loading}
                                 />
@@ -147,47 +146,41 @@ const Popup = ({ type, onClose }) => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className={`w-full py-3 rounded-lg font-semibold text-white transition-all ${loading
-                                        ? 'bg-blue-300 cursor-not-allowed'
-                                        : 'bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600'
-                                    }`}
+                                className={`popup-button ${loading ? "disabled" : ""}`}
                             >
                                 {loading ? "Accesso in corso..." : "Accedi"}
                             </button>
                         </form>
                     ) : (
-                        <div className="space-y-4">
-                            <div>
-                                <label className="block text-blue-600 mb-2">Nome</label>
+                        <div className="popup-form">
+                            <div className="popup-field">
+                                <label>Nome</label>
                                 <input
                                     type="text"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    className="w-full bg-blue-50 text-blue-900 p-3 rounded-lg focus:ring-2 focus:ring-blue-400"
                                     placeholder="Il tuo nome"
                                     disabled={loading}
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-blue-600 mb-2">Email</label>
+                            <div className="popup-field">
+                                <label>Email</label>
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-blue-50 text-blue-900 p-3 rounded-lg focus:ring-2 focus:ring-blue-400"
                                     placeholder="tua@email.com"
                                     disabled={loading}
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-blue-600 mb-2">Password</label>
+                            <div className="popup-field">
+                                <label>Password</label>
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-blue-50 text-blue-900 p-3 rounded-lg focus:ring-2 focus:ring-blue-400"
                                     placeholder="Min. 6 caratteri"
                                     disabled={loading}
                                 />
@@ -196,45 +189,38 @@ const Popup = ({ type, onClose }) => {
                             <button
                                 onClick={handleRegister}
                                 disabled={loading}
-                                className={`w-full py-3 rounded-lg font-semibold text-white transition-all ${loading
-                                        ? 'bg-blue-300 cursor-not-allowed'
-                                        : 'bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600'
-                                    }`}
+                                className={`popup-button ${loading ? "disabled" : ""}`}
                             >
                                 {loading ? "Registrazione in corso..." : "Registrati"}
                             </button>
                         </div>
                     )}
 
-                    <div className="flex items-center my-6">
-                        <div className="flex-1 border-t border-gray-300"></div>
-                        <span className="px-4 text-gray-500">oppure</span>
-                        <div className="flex-1 border-t border-gray-300"></div>
-                    </div>
+                    <div className="popup-divider">oppure</div>
 
                     <button
                         onClick={() => handleAuthAction(() => signInWithGoogle())}
                         disabled={loading}
-                        className="w-full flex items-center justify-center gap-3 bg-blue-100 hover:bg-blue-200 text-blue-800 py-3 px-4 rounded-lg font-semibold transition"
+                        className="popup-google-button"
                     >
                         <img
                             src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_48dp.png"
                             alt="Google"
-                            className="h-5 w-5"
+                            className="popup-google-logo"
                         />
                         Continua con Google
                     </button>
                 </div>
 
-                <div className="bg-blue-50 px-6 py-4 text-center rounded-b-xl">
-                    <p className="text-blue-600">
+                <div className="popup-footer">
+                    <p>
                         {formType === "Login" ? "Non hai un account? " : "Hai già un account? "}
                         <button
                             onClick={() => {
                                 setError("");
                                 setFormType(formType === "Login" ? "Register" : "Login");
                             }}
-                            className="text-green-600 hover:underline font-semibold"
+                            className="popup-footer-link"
                         >
                             {formType === "Login" ? "Registrati" : "Accedi"}
                         </button>

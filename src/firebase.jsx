@@ -10,7 +10,11 @@ import {
     setPersistence,
     updateProfile
 } from "firebase/auth";
-import { getFirestore, getDoc } from "firebase/firestore"; // <-- qui correttamente importi anche getDoc
+import {
+    getFirestore,
+    getDoc
+} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Configurazioni chiavi firebase
 const firebaseConfig = {
@@ -28,6 +32,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 // Imposta la persistenza all'avvio
 setPersistence(auth, browserSessionPersistence).catch((error) => {
@@ -57,5 +62,6 @@ export {
     createUserWithEmailAndPassword,
     updateProfile,
     db,
-    getDoc // <-- Se vuoi puoi anche esportarlo qui se ti serve fuori
+    storage,
+    getDoc
 };

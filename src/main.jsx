@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./App"; // La pagina principale con i pulsanti Registrati/Login
+import Home from "./App";
 import User from "./User";
+import GroupPage from "./GroupPage";
+import QuestSubmitPage from "./QuestSubmitPage";
 import { RedirectProvider } from "./RedirectContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -12,18 +14,20 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
+          <Route path="/group/:id" element={<GroupPage />} />
+          <Route path="/questsubmit/:groupId/:questId" element={<QuestSubmitPage />} />
         </Routes>
       </RedirectProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
 
-
+// Service Worker (opzionale se vuoi tenerlo)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then(registration => {
-        console.log('Service Worker registered with scope:', registration.scope);
+        console.log('Service Worker registered:', registration);
       })
       .catch(error => {
         console.log('Service Worker registration failed:', error);

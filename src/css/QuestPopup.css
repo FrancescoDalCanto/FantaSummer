@@ -1,0 +1,63 @@
+/* Overlay */
+.quest-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Container */
+.quest-popup-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.quest-popup-title {
+    font-size: 1.8rem;
+    color: #16a34a;
+    margin-bottom: 16px;
+}
+
+.quest-popup-text {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+
+.quest-popup-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.quest-popup-button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.quest-popup-button.reject {
+    background-color: #ef4444;
+}
+
+.quest-popup-button.accept {
+    background-color: #16a34a;
+}
+
+.quest-popup-button.reject:hover {
+    background-color: #dc2626;
+}
+
+.quest-popup-button.accept:hover {
+    background-color: #15803d;
+}

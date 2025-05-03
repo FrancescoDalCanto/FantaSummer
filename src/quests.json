@@ -1,0 +1,52 @@
+[
+    {
+        "id": "quest1",
+        "text": "Fai 10 flessioni",
+        "points": 20
+    },
+    {
+        "id": "quest2",
+        "text": "Scatta una foto al parco",
+        "points": 25
+    },
+    {
+        "id": "quest3",
+        "text": "Leggi 10 pagine di un libro",
+        "points": 15
+    },
+    {
+        "id": "quest4",
+        "text": "Prepara una colazione sana",
+        "points": 18
+    },
+    {
+        "id": "quest5",
+        "text": "Fai una passeggiata di 20 minuti",
+        "points": 22
+    },
+    {
+        "id": "quest6",
+        "text": "Bevi 2 litri d'acqua",
+        "points": 10
+    },
+    {
+        "id": "quest7",
+        "text": "Medita per 5 minuti",
+        "points": 12
+    },
+    {
+        "id": "quest8",
+        "text": "Riordina la tua stanza",
+        "points": 14
+    },
+    {
+        "id": "quest9",
+        "text": "Fai stretching per 10 minuti",
+        "points": 16
+    },
+    {
+        "id": "quest10",
+        "text": "Scrivi un pensiero positivo",
+        "points": 8
+    }
+]

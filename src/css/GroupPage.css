@@ -1,0 +1,76 @@
+.group-page {
+    padding: 40px;
+    text-align: center;
+}
+
+.group-title {
+    font-size: 2.5rem;
+    color: #16a34a;
+    margin-bottom: 20px;
+}
+
+.group-subtitle {
+    font-size: 1.5rem;
+    color: #3b82f6;
+    margin-bottom: 30px;
+}
+
+.group-ranking {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.group-ranking ol {
+    padding: 0;
+    margin: 0;
+}
+
+.group-item {
+    background-color: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.group-position {
+    font-weight: bold;
+    color: #3b82f6;
+    font-size: 1.2rem;
+}
+
+.group-user {
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.group-score {
+    background-color: #10b981;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Evidenzia il proprio utente */
+.group-item.me {
+    background-color: #dbeafe;
+    border-color: #93c5fd;
+}
+
+.group-item.me .group-user {
+    color: #2563eb;
+    font-weight: bold;
+}
