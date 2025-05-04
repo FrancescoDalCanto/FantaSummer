@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./App";
 import User from "./User";
 import GroupPage from "./GroupPage";
-import QuestSubmitPage from "./QuestSubmitPage";
+import QuestSubmit from "./QuestSubmit";
+import MyQuestDashboard from "./MyQuestDashboard";
+import AdminQuestApproval from "./AdminQuestApproval";
 import { RedirectProvider } from "./RedirectContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -15,14 +17,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
           <Route path="/group/:id" element={<GroupPage />} />
-          <Route path="/questsubmit/:groupId/:questId" element={<QuestSubmitPage />} />
+          <Route path="/questsubmit/:groupId/:questId" element={<QuestSubmit />} />
+          <Route path="/my-proofs" element={<MyQuestDashboard />} />
+          <Route path="/admin/quests" element={<AdminQuestApproval />} />
         </Routes>
       </RedirectProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
 
-// Service Worker (opzionale se vuoi tenerlo)
+// Service Worker (opzionale)
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
@@ -30,7 +34,7 @@ if ('serviceWorker' in navigator) {
         console.log('Service Worker registered:', registration);
       })
       .catch(error => {
-        console.log('Service Worker registration failed:', error);
+        console.error('Service Worker registration failed:', error);
       });
   });
 }
