@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:fantasummer": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google-cloud/vision": "^5.1.0",
     "firebase": "^11.6.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
